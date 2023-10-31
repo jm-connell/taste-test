@@ -6,7 +6,7 @@ This project is built with React + Vite. Currently it can only show the listenin
 
 I wrote this project to increase my understanding of both React and using third-party APIs.
 
-[Software Demo Video](http://youtube.link.goes.here)
+[Software Demo Video](https://youtu.be/2eluoMwpecU)
 
 # Web Pages
 
