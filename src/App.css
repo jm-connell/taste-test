@@ -1,0 +1,73 @@
+/* Apply to the body to set a slightly lighter background color */
+body {
+  background-color: #252525; /* Dark gray/almost black background */
+  margin: auto;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  max-width: 800px;
+}
+
+/* Apply to the main container (the body content) */
+main {
+  background-color: #444; /* Slightly lighter gray background */
+  width: 90%; /* 90% of viewport width */
+  margin: 0 auto; /* Center the content */
+  display: grid; /* Create a grid container */
+  grid-template-columns: 1fr 1fr; /* Two equal-width columns */
+  justify-content: center; /* Center the columns horizontally */
+}
+
+/* Style the artist and track boxes (columns) */
+.artist-box,
+.track-box {
+  flex: 1;
+  padding: 0 20px;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.track-heading,
+.artist-heading {
+  margin: 10px auto;
+}
+
+.column-header {
+  margin: 10px;
+  border-bottom: 2px solid #1db954;
+  display: inline-block;
+  padding-right: 15px;
+}
+
+h1,
+h2 {
+  color: #eaeaea;
+}
+
+img {
+  width: 200px;
+  height: auto;
+  display: block;
+  margin: auto;
+  max-width: 100%;
+}
+
+.login-button {
+  padding: 15px 30px; /* Increase padding for a larger button */
+  background-color: #1db954; /* Button background color */
+  color: #fff; /* Button text color */
+  border: none; /* Remove button border */
+  border-radius: 10px; /* Rounded corners */
+  font-size: 20px; /* Increase font size */
+  cursor: pointer;
+  align-self: center; /* Center the button vertically */
+  text-align: center; /* Center the text horizontally */
+  margin: auto;
+}
+
+.center-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+}
