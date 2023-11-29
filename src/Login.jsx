@@ -23,9 +23,9 @@ function Login({ setAuthenticated }) {
     const code = urlSearchParams.get("code");
 
     if (code) {
-      setAuthenticated(true);
       fetchAccessToken(code).then((access_token) => {
         localStorage.setItem("access_token", access_token);
+        setAuthenticated(true);
       });
 
       // Remove the code parameter from URL so it doesn't send two POST requests
@@ -54,9 +54,10 @@ function Login({ setAuthenticated }) {
 
     if (response.ok) {
       const tokenData = await response.json();
-      return tokenData.access_token;
+      return Promise.resolve(tokenData.access_token);
     } else {
       console.error("Token exchange failed.");
+      return Promise.reject();
     }
   }
 
