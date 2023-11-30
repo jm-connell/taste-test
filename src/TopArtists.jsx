@@ -4,7 +4,7 @@ const TopArtists = () => {
   const [artists, setArtists] = useState([]);
 
   useEffect(() => {
-    const accessToken = localStorage.getItem("access_token");
+    const accessToken = sessionStorage.getItem("access_token");
     fetch(
       "https://api.spotify.com/v1/me/top/artists?time_range=short_term&limit=10",
       {
