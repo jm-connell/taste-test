@@ -23,10 +23,12 @@ function Login({ setAuthenticated }) {
     const code = urlSearchParams.get("code");
 
     if (code) {
+      fetchAccessToken(code).then((access_token) => {
       setAuthenticated(true);
       // get first access token and refresh token
       fetchInitialAccessToken(code).then((access_token) => {
         localStorage.setItem("access_token", access_token);
+        setAuthenticated(true);
       });
 
       // Remove the code parameter from URL so it doesn't send two POST requests
@@ -56,11 +58,36 @@ function Login({ setAuthenticated }) {
 
     if (response.ok) {
       const tokenData = await response.json();
+      return Promise.resolve(tokenData.access_token);
       sessionStorage.setItem("access_token", tokenData.access_token);
       // send refresh token to backend to store in database
       return null;
     } else {
       console.error("Token exchange failed.");
+      return Promise.reject();
+    }
+  }
+
+  // Get refreshed access token for existing users
+  async function fetchRefreshedAccessToken(refreshToken) {
+    let requestBody = "";
+    requestBody += `grant_type=refresh_token`;
+    requestBody += `&refresh_token=${refreshToken}`;
+
+    const response = await fetch("https://accounts.spotify.com/api/token", {
+      method: "POST",
+      headers: {
+        Authorization: `Basic ${btoa(`${client_id}:${client_secret}`)}`,
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: requestBody,
+    });
+
+    if (response.ok) {
+      const tokenData = await response.json();
+      return tokenData.access_token;
+    } else {
+      console.error("Token refresh failed.");
     }
   }
 
