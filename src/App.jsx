@@ -12,6 +12,7 @@ import HomePage from './pages/HomePage';
 import FriendFeed from './pages/FriendFeed';
 import SettingsPage from './pages/SettingsPage';
 import { SpotifyTokenProvider } from './context/SpotifyTokenContext';
+import HeaderFooter from './components/HeaderFooter';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -46,28 +47,30 @@ function App() {
   return (
     <SpotifyTokenProvider>
       <Router>
-        <Routes>
-          <Route
-            path="/"
-            element={user ? <Navigate to="/home" /> : <LoginPage />}
-          />
-          <Route
-            path="/home"
-            element={user ? <HomePage /> : <Navigate to="/" />}
-          />
-          <Route
-            path="/feed"
-            element={user ? <FriendFeed /> : <Navigate to="/" />}
-          />
-          <Route
-            path="/settings"
-            element={user ? <SettingsPage /> : <Navigate to="/" />}
-          />
-          <Route
-            path="*"
-            element={user ? <Navigate to="/home" /> : <Navigate to="/" />}
-          />
-        </Routes>
+        <HeaderFooter>
+          <Routes>
+            <Route
+              path="/"
+              element={user ? <Navigate to="/home" /> : <LoginPage />}
+            />
+            <Route
+              path="/home"
+              element={user ? <HomePage /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/feed"
+              element={user ? <FriendFeed /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/settings"
+              element={user ? <SettingsPage /> : <Navigate to="/" />}
+            />
+            <Route
+              path="*"
+              element={user ? <Navigate to="/home" /> : <Navigate to="/" />}
+            />
+          </Routes>
+        </HeaderFooter>
       </Router>
     </SpotifyTokenProvider>
   );
