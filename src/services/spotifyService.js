@@ -1,5 +1,4 @@
 export const fetchRecentlyPlayedTracks = async (spotifyToken) => {
-  console.log('Fetching recently played tracks with token:', spotifyToken);
   const response = await fetch(
     'https://api.spotify.com/v1/me/player/recently-played',
     {
@@ -11,11 +10,9 @@ export const fetchRecentlyPlayedTracks = async (spotifyToken) => {
 
   if (!response.ok) {
     const errorText = await response.text();
-    console.error('Failed to fetch recently played tracks:', errorText);
     throw new Error('Failed to fetch recently played tracks');
   }
 
   const data = await response.json();
-  console.log('Fetched recently played tracks:', data);
   return data;
 };

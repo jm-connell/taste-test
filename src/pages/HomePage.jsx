@@ -13,17 +13,14 @@ function HomePage() {
   useEffect(() => {
     const getListeningData = async () => {
       if (!spotifyToken) {
-        console.log('No Spotify token available');
         setLoading(false);
         return;
       }
 
       try {
         const data = await fetchRecentlyPlayedTracks(spotifyToken);
-        console.log('Listening data:', data);
         setListeningData(data);
       } catch (error) {
-        console.error('Error fetching listening data:', error);
         setError(error.message);
       } finally {
         setLoading(false);
