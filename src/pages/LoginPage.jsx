@@ -9,6 +9,9 @@ function LoginPage() {
   const signInWithSpotify = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'spotify',
+      options: {
+        scopes: 'user-read-recently-played user-read-private user-read-email',
+      },
     });
     if (error) {
       console.error('Error signing in:', error);
