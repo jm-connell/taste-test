@@ -10,7 +10,8 @@ function LoginPage() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'spotify',
       options: {
-        scopes: 'user-read-recently-played user-read-private user-read-email',
+        scopes:
+          'user-read-recently-played user-read-private user-read-email user-top-read',
       },
     });
     if (error) {

@@ -41,29 +41,31 @@ const RecentlyPlayedTracks = () => {
     <div>
       <h2>Recently Played Tracks</h2>
       {listeningData ? (
-        <table className="recently-played-table">
-          <thead>
-            <tr>
-              <th>Track Name</th>
-              <th>Artists</th>
-              <th>Last Played</th>
-            </tr>
-          </thead>
-          <tbody>
-            {listeningData.items.map((item, index) => (
-              <tr
-                key={item.track.id}
-                className={index % 2 === 0 ? 'even' : 'odd'}
-              >
-                <td>{item.track.name}</td>
-                <td>
-                  {item.track.artists.map((artist) => artist.name).join(', ')}
-                </td>
-                <td>{new Date(item.played_at).toLocaleString()}</td>
+        <div className="table-container">
+          <table className="recently-played-table">
+            <thead>
+              <tr>
+                <th>Track Name</th>
+                <th>Artists</th>
+                <th>Last Played</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {listeningData.items.slice(0, 10).map((item, index) => (
+                <tr
+                  key={item.track.id}
+                  className={index % 2 === 0 ? 'even' : 'odd'}
+                >
+                  <td>{item.track.name}</td>
+                  <td>
+                    {item.track.artists.map((artist) => artist.name).join(', ')}
+                  </td>
+                  <td>{new Date(item.played_at).toLocaleString()}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       ) : (
         <p>No data available</p>
       )}

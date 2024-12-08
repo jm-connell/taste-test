@@ -1,5 +1,6 @@
 import { useSpotifyToken } from '../context/SpotifyTokenContext';
 import RecentlyPlayedTracks from '../components/RecentlyPlayedTracks';
+import TopTracksPopularity from '../components/TopTracksPopularity';
 import '../styles/HomePage.css';
 
 function HomePage() {
@@ -9,6 +10,7 @@ function HomePage() {
     <div>
       <h1>Welcome to the Home Page</h1>
       <RecentlyPlayedTracks />
+      <TopTracksPopularity />
     </div>
   );
 }

@@ -1,27 +1,27 @@
 .recently-played-table {
   width: 100%;
-  max-width: 800px; /* Add max-width */
+  max-width: 800px;
   border-collapse: collapse;
-  margin: 20px auto; /* Center the table */
+  margin: 20px auto;
   font-size: 1em;
   text-align: left;
-  color: white; /* Set text color to white */
+  color: white;
 }
 
 .recently-played-table th,
 .recently-played-table td {
   padding: 12px 15px;
-  border: 1px solid #444; /* Darker border color */
+  border: 1px solid #444;
 }
 
 .recently-played-table th {
-  background-color: #333; /* Darker header background */
+  background-color: #333;
 }
 
 .recently-played-table tr.even {
-  background-color: #222; /* Darker even row background */
+  background-color: #222;
 }
 
 .recently-played-table tr.odd {
-  background-color: #111; /* Darker odd row background */
+  background-color: #111;
 }
