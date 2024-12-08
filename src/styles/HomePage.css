@@ -1,7 +1,8 @@
 .recently-played-table {
   width: 100%;
+  max-width: 800px; /* Add max-width */
   border-collapse: collapse;
-  margin: 20px 0;
+  margin: 20px auto; /* Center the table */
   font-size: 1em;
   text-align: left;
   color: white; /* Set text color to white */
