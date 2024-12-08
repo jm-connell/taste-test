@@ -25,16 +25,3 @@
 .recently-played-table tr.odd {
   background-color: #111; /* Darker odd row background */
 }
-
-.play-button {
-  background-color: #1db954;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-  border-radius: 4px;
-}
-
-.play-button:hover {
-  background-color: #1ed760;
-}
