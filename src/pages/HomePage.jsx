@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { fetchRecentlyPlayedTracks } from '../services/spotifyService';
 import { useSpotifyToken } from '../context/SpotifyTokenContext';
-import './HomePage.css'; // Import the CSS file for styling
+import '../styles/HomePage.css'; // Updated import path
 
 function HomePage() {
   const spotifyToken = useSpotifyToken();
