@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { fetchRecentlyPlayedTracks } from '../services/spotifyService';
 import { useSpotifyToken } from '../context/SpotifyTokenContext';
-import '../styles/HomePage.css';
+import '../App.css';
 
 const RecentlyPlayedTracks = () => {
   const spotifyToken = useSpotifyToken();

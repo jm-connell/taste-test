@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSpotifyToken } from '../context/SpotifyTokenContext';
+import '../App.css';
 
 const fetchTopTracks = async (spotifyToken) => {
   const response = await fetch(

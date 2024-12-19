@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import '../styles/index.css'; // Updated import path
+import '../App.css'; // Updated import path
 
 const HeaderFooter = ({ children }) => {
   return (

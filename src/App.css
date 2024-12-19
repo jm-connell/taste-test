@@ -1,8 +1,39 @@
+:root {
+  --background-color: #121212;
+  --card-background-color: #1e1e1e;
+  --accent-color: #5ccfe6;
+  --text-color: #ffffff;
+  --secondary-text-color: #b3b3b3;
+  --border-color: #282828;
+  --error-color: #322134;
+  font-family: Roboto, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .logo {
@@ -12,10 +43,10 @@
   transition: filter 300ms;
 }
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 2em var(--accent-color));
 }
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  filter: drop-shadow(0 0 2em var(--accent-color));
 }
 
 @keyframes logo-spin {
@@ -35,10 +66,223 @@
 
 .card {
   padding: 2em;
+  background-color: var(--card-background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 15px;
 }
 
 .read-the-docs {
-  color: #888;
+  color: var(--secondary-text-color);
 }
 
-/* Blank Project Styles */
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+/* Navigation Styles */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  padding: 0;
+  justify-content: center;
+  font-size: 1.2em;
+}
+
+.nav-links li {
+  display: inline;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+  color: var(--accent-color);
+}
+
+/* Feed Post Styles */
+.feed-post {
+  border: 1px solid var(--border-color);
+  padding: 10px;
+  margin: 30px auto;
+  display: flex;
+  align-items: flex-start;
+  max-width: 600px;
+  min-width: 350px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  transition: box-shadow 0.2s ease;
+  background-color: var(--card-background-color);
+}
+
+.feed-post:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.8);
+}
+
+.profile-picture {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.post-content {
+  flex: 1;
+}
+
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.username {
+  font-weight: bold;
+  margin: 18px 0 0 0;
+  color: var(--accent-color);
+}
+
+.date {
+  color: var(--secondary-text-color);
+  margin: auto 10px auto auto;
+}
+
+.content-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.content {
+  margin-bottom: 10px;
+  padding-right: 20px;
+  flex: 1;
+  color: var(--secondary-text-color);
+}
+
+.artwork {
+  width: 250px;
+  height: 250px;
+  margin: 10px;
+  border-radius: 10px;
+}
+
+/* Recently Played Table Styles */
+.recently-played-table {
+  width: 100%;
+  max-width: 800px;
+  border-collapse: collapse;
+  margin: 20px auto;
+  font-size: 1em;
+  text-align: left;
+  color: white;
+}
+
+.recently-played-table th,
+.recently-played-table td {
+  padding: 12px 15px;
+  border: 1px solid #444;
+}
+
+.recently-played-table th {
+  background-color: #333;
+}
+
+.recently-played-table tr.even {
+  background-color: #222;
+}
+
+.recently-played-table tr.odd {
+  background-color: #111;
+}
+
+/* Help Icon Styles */
+.help-icon {
+  display: inline-block;
+  margin-left: 5px;
+  cursor: pointer;
+  border-radius: 50%;
+  background-color: #333;
+  color: #fff;
+  width: 16px;
+  height: 16px;
+  text-align: center;
+  line-height: 16px;
+  font-size: 12px;
+  position: relative;
+}
+
+.help-icon:hover::after {
+  content: attr(title);
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+.help-icon:hover::before {
+  content: '';
+  position: absolute;
+  bottom: 115%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: #333 transparent transparent transparent;
+}
+
+/* Footer Styles */
+footer {
+  color: var(--accent-color);
+}
