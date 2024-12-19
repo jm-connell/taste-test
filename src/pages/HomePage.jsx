@@ -7,7 +7,7 @@ import '../App.css';
 const HomePage = () => {
   return (
     <div>
-      <h1>Welcome to the Home Page</h1>
+      <h1>Home</h1>
       <RecentlyPlayedTracks />
       <TopTracksPopularity />
       <TopArtist />
