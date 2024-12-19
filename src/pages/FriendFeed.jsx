@@ -1,17 +1,37 @@
+import React, { useEffect, useState } from 'react';
+import FeedPost from '../components/FeedPost';
+import samplePosts from '../data/samplePosts';
 import { useSpotifyToken } from '../context/SpotifyTokenContext';
+import '../App.css';
 
-function FriendFeed() {
+const FriendFeed = () => {
   const spotifyToken = useSpotifyToken();
+  const [posts, setPosts] = useState([]);
 
-  // Add any necessary logic to fetch and display friend activity data
-  // For example, you might fetch data from Spotify using the spotifyToken
+  useEffect(() => {
+    const fetchData = async () => {
+      // Placeholder for actual database fetching logic
+      setPosts(samplePosts);
+    };
+
+    fetchData();
+  }, [spotifyToken]);
 
   return (
     <div>
       <h1>Friend Activity Feed</h1>
-      {/* Add UI to display friend activity data */}
+      {posts.map((post, index) => (
+        <FeedPost
+          key={index}
+          profilePicture={post.profilePicture}
+          username={post.username}
+          date={post.date}
+          content={post.content}
+          artwork={post.artwork}
+        />
+      ))}
     </div>
   );
-}
+};
 
 export default FriendFeed;
