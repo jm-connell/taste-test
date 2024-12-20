@@ -11,14 +11,14 @@ export const SpotifyTokenProvider = ({ children }) => {
       const {
         data: { session },
       } = await supabase.auth.getSession();
-      setSpotifyToken(session?.provider_token ?? null);
+      setSpotifyToken(session?.provider_token);
     };
 
     getSession();
 
     const { data: authListener } = supabase.auth.onAuthStateChange(
       (event, session) => {
-        setSpotifyToken(session?.provider_token ?? null);
+        setSpotifyToken(session?.provider_token);
       }
     );
 
