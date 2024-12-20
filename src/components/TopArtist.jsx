@@ -1,23 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSpotifyToken } from '../context/SpotifyTokenContext';
-
-const fetchRecentlyPlayedTracks = async (spotifyToken, nextUrl = null) => {
-  const url =
-    nextUrl || 'https://api.spotify.com/v1/me/player/recently-played?limit=50';
-  const response = await fetch(url, {
-    headers: {
-      Authorization: `Bearer ${spotifyToken}`,
-    },
-  });
-
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error('Failed to fetch recently played tracks');
-  }
-
-  const data = await response.json();
-  return data;
-};
+import { fetchRecentlyPlayedTracks } from '../services/spotifyService';
 
 const getFriendlyDate = (dateString) => {
   const date = new Date(dateString);
@@ -58,13 +41,13 @@ const TopArtist = () => {
 
       try {
         let allTracks = [];
-        let nextUrl = null;
+        let url = null;
 
         for (let i = 0; i < 4; i++) {
-          const data = await fetchRecentlyPlayedTracks(spotifyToken, nextUrl);
+          const data = await fetchRecentlyPlayedTracks(spotifyToken, url);
           allTracks = allTracks.concat(data.items);
-          nextUrl = data.next;
-          if (!nextUrl) break;
+          url = data.next;
+          if (!url) break;
         }
 
         const artistCount = {};
