@@ -8,9 +8,9 @@ const FriendFeed = () => {
   const spotifyToken = useSpotifyToken();
   const [posts, setPosts] = useState([]);
 
+  /* Get placeholder data */
   useEffect(() => {
     const fetchData = async () => {
-      // Placeholder for actual database fetching logic
       setPosts(samplePosts);
     };
 
