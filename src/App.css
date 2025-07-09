@@ -286,6 +286,12 @@ footer {
   color: var(--accent-color);
 }
 
+/* Accent Text Style */
+.accent-text {
+  color: var(--accent-color);
+  font-weight: 500;
+}
+
 /* HomePage Controls */
 .controls {
   display: flex;
@@ -323,4 +329,40 @@ footer {
   font-size: 0.9em;
   color: var(--secondary-text-color);
   margin-top: 0.5rem;
+}
+
+/* Chart Styles */
+.chart-container {
+  margin: 30px 0;
+  padding: 15px;
+  background-color: var(--card-background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.chart-content {
+  margin: 20px auto;
+  position: relative;
+}
+
+.chart-loading,
+.chart-error {
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--secondary-text-color);
+}
+
+.chart-error {
+  color: var(--accent-color);
+}
+
+/* Make chart titles more compact */
+.chart-container h2 {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  font-size: 1.4em;
 }

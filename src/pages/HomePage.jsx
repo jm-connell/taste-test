@@ -2,6 +2,9 @@ import { useState } from 'react';
 import RecentlyPlayedTracks from '../components/RecentlyPlayedTracks';
 import TopTracksPopularity from '../components/TopTracksPopularity';
 import TopArtist from '../components/TopArtist';
+import ListeningActivityChart from '../components/charts/ListeningActivityChart';
+import GenreDistributionChart from '../components/charts/GenreDistributionChart';
+import ArtistDistributionChart from '../components/charts/ArtistDistributionChart';
 import { supabase } from '../supabaseClient';
 import { useSpotifyToken } from '../context/SpotifyTokenContext';
 import '../App.css';
@@ -52,6 +55,11 @@ const HomePage = () => {
 
       <div key={refreshKey}>
         <RecentlyPlayedTracks />
+        <ListeningActivityChart />
+        <div className="chart-grid">
+          <GenreDistributionChart />
+          <ArtistDistributionChart />
+        </div>
         <TopTracksPopularity />
         <TopArtist />
       </div>
