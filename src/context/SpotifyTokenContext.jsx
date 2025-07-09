@@ -11,13 +11,23 @@ export const SpotifyTokenProvider = ({ children }) => {
       const {
         data: { session },
       } = await supabase.auth.getSession();
-      setSpotifyToken(session?.provider_token);
+
+      console.log('Session from Supabase:', session);
+      console.log('Provider token available:', !!session?.provider_token);
+
+      if (session?.provider_token) {
+        setSpotifyToken(session.provider_token);
+      } else {
+        console.warn('No provider token found in session');
+      }
     };
 
     getSession();
 
     const { data: authListener } = supabase.auth.onAuthStateChange(
       (event, session) => {
+        console.log('Auth state changed:', event);
+        console.log('New provider token available:', !!session?.provider_token);
         setSpotifyToken(session?.provider_token);
       }
     );

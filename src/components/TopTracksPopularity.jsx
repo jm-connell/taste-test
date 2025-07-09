@@ -3,22 +3,34 @@ import { useSpotifyToken } from '../context/SpotifyTokenContext';
 import '../App.css';
 
 const fetchTopTracks = async (spotifyToken) => {
-  const response = await fetch(
-    'https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=50',
-    {
-      headers: {
-        Authorization: `Bearer ${spotifyToken}`,
-      },
-    }
-  );
-
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error('Failed to fetch top tracks');
+  if (!spotifyToken) {
+    throw new Error('No Spotify token available');
   }
 
-  const data = await response.json();
-  return data;
+  try {
+    const response = await fetch(
+      'https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=50',
+      {
+        headers: {
+          Authorization: `Bearer ${spotifyToken}`,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('API Error Response:', errorText);
+      throw new Error(
+        `Failed to fetch top tracks: ${response.status} ${response.statusText}`
+      );
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching top tracks:', error);
+    throw error;
+  }
 };
 
 const TopTracksPopularity = () => {
@@ -30,12 +42,26 @@ const TopTracksPopularity = () => {
   useEffect(() => {
     const getTopTracks = async () => {
       if (!spotifyToken) {
+        console.log(
+          'No Spotify token available for TopTracksPopularity component'
+        );
         setLoading(false);
         return;
       }
 
       try {
+        console.log('Fetching top tracks data...');
         const data = await fetchTopTracks(spotifyToken);
+
+        if (!data || !data.items || data.items.length === 0) {
+          console.warn('No items returned from top tracks API');
+          setError(
+            'No top tracks found. You may need to use Spotify more to generate this data.'
+          );
+          setLoading(false);
+          return;
+        }
+
         const totalPopularity = data.items.reduce(
           (sum, track) => sum + track.popularity,
           0
@@ -43,7 +69,8 @@ const TopTracksPopularity = () => {
         const avgPopularity = totalPopularity / data.items.length;
         setAveragePopularity(avgPopularity);
       } catch (error) {
-        setError(error.message);
+        console.error('Error in TopTracksPopularity component:', error);
+        setError(error.message || 'An unknown error occurred');
       } finally {
         setLoading(false);
       }
@@ -53,11 +80,20 @@ const TopTracksPopularity = () => {
   }, [spotifyToken]);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <p>Loading popularity data...</p>;
   }
 
   if (error) {
-    return <p>Error: {error}</p>;
+    return (
+      <div>
+        <h2>Average Song Popularity</h2>
+        <p>Error: {error}</p>
+        <p>
+          Note: This data requires Spotify listening history. New accounts may
+          not have enough data.
+        </p>
+      </div>
+    );
   }
 
   return (
@@ -74,7 +110,7 @@ const TopTracksPopularity = () => {
           </span>
         </p>
       ) : (
-        <p>No data available</p>
+        <p>No data available. Try reconnecting to Spotify.</p>
       )}
     </div>
   );

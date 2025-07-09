@@ -245,3 +245,42 @@ footer {
   margin-top: 100px;
   color: var(--accent-color);
 }
+
+/* HomePage Controls */
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+  gap: 0.5rem;
+}
+
+.refresh-button,
+.spotify-button {
+  background-color: var(--accent-color);
+  color: var(--background-color);
+  padding: 0.6em 1.2em;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  min-width: 200px;
+}
+
+.refresh-button:hover,
+.spotify-button:hover {
+  background-color: #4bbbd3;
+  transform: translateY(-2px);
+}
+
+.refresh-button:active,
+.spotify-button:active {
+  transform: translateY(1px);
+}
+
+.token-status {
+  font-size: 0.9em;
+  color: var(--secondary-text-color);
+  margin-top: 0.5rem;
+}

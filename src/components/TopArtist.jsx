@@ -35,23 +35,43 @@ const TopArtist = () => {
   useEffect(() => {
     const getTopArtist = async () => {
       if (!spotifyToken) {
+        console.log('No Spotify token available for TopArtist component');
         setLoading(false);
         return;
       }
 
       try {
+        console.log('Fetching top artist data...');
         let allTracks = [];
         let url = null;
 
         for (let i = 0; i < 4; i++) {
           const data = await fetchRecentlyPlayedTracks(spotifyToken, url);
+          if (!data || !data.items) {
+            console.error('Invalid data returned from API:', data);
+            throw new Error('Invalid data returned from Spotify API');
+          }
+
           allTracks = allTracks.concat(data.items);
           url = data.next;
           if (!url) break;
         }
 
+        console.log(`Retrieved ${allTracks.length} tracks for analysis`);
+
+        if (allTracks.length === 0) {
+          setError('No recently played tracks found');
+          setLoading(false);
+          return;
+        }
+
         const artistCount = {};
         allTracks.forEach((item) => {
+          if (!item.track) {
+            console.warn('Track data missing in item:', item);
+            return;
+          }
+
           item.track.artists.forEach((artist) => {
             if (!artistCount[artist.name]) {
               artistCount[artist.name] = {
@@ -69,7 +89,14 @@ const TopArtist = () => {
           });
         });
 
-        const topArtist = Object.keys(artistCount).reduce((a, b) =>
+        const artistNames = Object.keys(artistCount);
+        if (artistNames.length === 0) {
+          setError('No artist data could be processed');
+          setLoading(false);
+          return;
+        }
+
+        const topArtist = artistNames.reduce((a, b) =>
           artistCount[a].count > artistCount[b].count ? a : b
         );
 
@@ -79,7 +106,8 @@ const TopArtist = () => {
           firstPlayed: artistCount[topArtist].firstPlayed,
         });
       } catch (error) {
-        setError(error.message);
+        console.error('Error in TopArtist component:', error);
+        setError(error.message || 'An unknown error occurred');
       } finally {
         setLoading(false);
       }
@@ -89,11 +117,17 @@ const TopArtist = () => {
   }, [spotifyToken]);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <p>Loading top artist data...</p>;
   }
 
   if (error) {
-    return <p>Error: {error}</p>;
+    return (
+      <div>
+        <h2>Top Artist in Past 200 Tracks</h2>
+        <p>Error: {error}</p>
+        <p>Please try refreshing the page or sign in again.</p>
+      </div>
+    );
   }
 
   return (
@@ -105,7 +139,7 @@ const TopArtist = () => {
           {topArtist.count} plays since {getFriendlyDate(topArtist.firstPlayed)}
         </p>
       ) : (
-        <p>No data available</p>
+        <p>No data available. Please check your Spotify account connection.</p>
       )}
     </div>
   );
