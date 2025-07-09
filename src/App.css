@@ -286,6 +286,12 @@ footer {
   color: var(--accent-color);
 }
 
+/* Accent Text Style */
+.accent-text {
+  color: var(--accent-color);
+  font-weight: 500;
+}
+
 /* HomePage Controls */
 .controls {
   display: flex;

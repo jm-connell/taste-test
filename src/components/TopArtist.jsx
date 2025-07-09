@@ -135,8 +135,10 @@ const TopArtist = () => {
       <h2>Top Artist in Past 200 Tracks</h2>
       {topArtist ? (
         <p>
-          You've been listening to a lot of {topArtist.name} recently,{' '}
-          {topArtist.count} plays since {getFriendlyDate(topArtist.firstPlayed)}
+          You've been listening to a lot of{' '}
+          <span className="accent-text">{topArtist.name}</span> recently,{' '}
+          <span className="accent-text">{topArtist.count} plays</span> since{' '}
+          {getFriendlyDate(topArtist.firstPlayed)}
         </p>
       ) : (
         <p>No data available. Please check your Spotify account connection.</p>
