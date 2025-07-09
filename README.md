@@ -1,6 +1,6 @@
 # Taste Test: Spotify Listening Analytics
 
-Taste Test is a web application that provides detailed analytics about your Spotify listening habits and offers a social feed to track your friends' musical journeys.
+Taste Test is a web application that provides detailed analytics about your Spotify listening habits and offers a social feed to stay up-to-date on your friends' listening activity.
 
 ## Features
 
