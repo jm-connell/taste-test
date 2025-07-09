@@ -240,6 +240,46 @@ button:focus-visible {
   border-color: #333 transparent transparent transparent;
 }
 
+/* Explanation Dropdown Styles */
+.explanation-toggle {
+  display: block;
+  margin: 5px auto;
+  cursor: pointer;
+  color: var(--secondary-text-color);
+  font-size: 0.9em;
+  transition: color 0.2s ease;
+  text-align: center;
+}
+
+.explanation-toggle:hover {
+  color: var(--accent-color);
+}
+
+.explanation-box {
+  background-color: var(--card-background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  padding: 10px 15px;
+  margin: 10px auto;
+  color: var(--secondary-text-color);
+  font-size: 0.9em;
+  text-align: center;
+  max-width: 600px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* Footer Styles */
 footer {
   margin-top: 100px;

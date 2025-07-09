@@ -9,7 +9,7 @@ const fetchTopTracks = async (spotifyToken) => {
 
   try {
     const response = await fetch(
-      'https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=50',
+      'https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=25',
       {
         headers: {
           Authorization: `Bearer ${spotifyToken}`,
@@ -38,6 +38,7 @@ const TopTracksPopularity = () => {
   const [averagePopularity, setAveragePopularity] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showExplanation, setShowExplanation] = useState(false);
 
   useEffect(() => {
     const getTopTracks = async () => {
@@ -79,6 +80,10 @@ const TopTracksPopularity = () => {
     getTopTracks();
   }, [spotifyToken]);
 
+  const toggleExplanation = () => {
+    setShowExplanation(!showExplanation);
+  };
+
   if (loading) {
     return <p>Loading popularity data...</p>;
   }
@@ -100,15 +105,19 @@ const TopTracksPopularity = () => {
     <div>
       <h2>Average Song Popularity</h2>
       {averagePopularity !== null ? (
-        <p>
-          Average Popularity: {averagePopularity.toFixed(2)}
-          <span
-            className="help-icon"
-            title="The average global popularity rating of your top 50 tracks in the past month. Popularity is a value between 0 and 100, with 100 being the most popular."
-          >
-            ?
-          </span>
-        </p>
+        <div>
+          <p>Average Popularity: {averagePopularity.toFixed(2)}</p>
+          <div className="explanation-toggle" onClick={toggleExplanation}>
+            What does this mean? {showExplanation ? '▲' : '▼'}
+          </div>
+          {showExplanation && (
+            <div className="explanation-box">
+              The average global popularity rating of your 25 most listened to
+              tracks in the past month. Popularity is a value between 0 and 100,
+              with 100 being the most popular.
+            </div>
+          )}
+        </div>
       ) : (
         <p>No data available. Try reconnecting to Spotify.</p>
       )}
