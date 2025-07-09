@@ -36,7 +36,9 @@ function LoginPage() {
 
   return (
     <div>
-      <button onClick={signInWithSpotify}>Sign in with Spotify</button>
+      <button id="spotify-button" onClick={signInWithSpotify}>
+        Sign in with Spotify
+      </button>
       {errorMessage && <p>{errorMessage}</p>}
     </div>
   );
